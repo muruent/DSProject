@@ -28,7 +28,8 @@ dashboardPage(
   dashboardSidebar(
     menuItem("Map", tabName = 'map', icon= icon("map")),
     menuItem("Graph", tabName = 'graph', icon = icon("signal")),
-    menuItem("Cities", tabName = 'cities', icon = icon("city"))
+    menuItem("Cities", tabName = 'cities', icon = icon("city")),
+    menuItem("States", tabName = 'States', icon = icon("State"))
     ),
   dashboardBody(
     tabItems(
@@ -49,8 +50,8 @@ dashboardPage(
         selectInput ('state', label = "Select State", choices = statelist), 
         plotOutput('plot')
               ),
-      tabItem(tabName = 'cities', plotOutput('cities')
-        
+      tabItem(tabName = 'cities', plotOutput('cities')),
+      tabItem(tabName = 'States', plotOutput('States', height=550)
         
       )
   ))

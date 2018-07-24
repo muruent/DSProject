@@ -42,7 +42,7 @@ shinyServer(function(input, output) {
     top10cities <- d %>% group_by(city_or_county) %>% 
       summarize(Incidents = n()) %>% 
       arrange(Incidents) %>% 
-      tail(10)
+      tail(15)
     
     top10cities$city_or_county = factor(top10cities$city_or_county, levels = top10cities$city_or_county)
     ggplot(top10cities, aes(x = city_or_county, y = Incidents, fill =Incidents)) + 
@@ -51,6 +51,21 @@ shinyServer(function(input, output) {
     
   })
   
+  output$States = renderPlot({
+  
+  bystate <- d %>% group_by(state) %>% summarize(n = n()) %>% arrange(n)
+  bystate$state <- factor(bystate$state, levels = bystate$state)
+  
+  ggplot(bystate, aes(x = state, y = n )) +
+    geom_bar(stat = "identity", aes(fill = state)) + 
+    coord_flip() + 
+    theme_bw()+ 
+    theme (legend.position = "none")+
+    ggtitle('Violent States')+
+    theme(plot.title= element_text(hjust = 0.5,size=30, face = "bold"))
+
+
+  })
   output$map <- leaflet::renderLeaflet({
     leaflet::leaflet(DATA$d
                      #, options = leafletOptions(minZoom=4)

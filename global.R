@@ -31,34 +31,14 @@ newDATA = gv.df[complete.cases(gv.df),]
 d = newDATA[sample(nrow(newDATA), 50000),]
 
 
-#rm(list=ls())
-#library(data.table)
-#setwd("/home/zach/US_Mass_Shootings")
-#read mass shooting data
-#d = read.csv("Mass Shootings Dataset.csv",as.is=TRUE)
-#d = read.csv("Mass Shootings Dataset Ver 2.csv",as.is=TRUE)
-#create a properly formatted date variable (could be useful later)
 d$rdate = as.Date(d$date, "%m/%d/%Y")
 #sort earliest to latest.  Important for time series functionality later
 d=d[order(d$rdate),]
-#Searh google maps for missing latitude and longitudes
-#missing_latlon_ind = (is.na(d$Latitude) | is.na(d$Longitude) )
-#New_latlon = geocode(d$Location[missing_latlon_ind])
-#assign new latitude and longitude
-#d$Latitude[missing_latlon_ind] = New_latlon$lat
-#d$Longitude[missing_latlon_ind] = New_latlon$lon
-#save to RData file for easy loading in app
 
 #create a normalized weight for sizing points on leaflet map in Rshiny
 d['Total.victims'] = d$n_injured + d$n_killed
 d$size = (d$Total.victims)
-#indicator for contental US
-#d$continental = !grepl("Alaska|Hawaii",d$Location)
 
-############################################################
-###create annual data.frame and time_series object.  This will be useful for displaying time series data and for widgets
-#d$Year = as.numeric(format(d$rdate,"%Y"))
-#create initial annual level data.frame with fatalities, injured and total victims
 annual_staging = aggregate(d[,6:7],list(year=d$year),FUN=sum)
 ##in some years there were no shootings....we will imput zeros for these
 year_vec=min(d$year):max(d$year)
