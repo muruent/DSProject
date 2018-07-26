@@ -12,7 +12,6 @@ library(dplyr)
 library(plotly)
 library(scales)
 library(viridis)
-library(assertive, warn.conflicts = FALSE)
 library(shiny)
 library(leaflet)
 library(shinydashboard)
@@ -20,6 +19,8 @@ library(magrittr)
 library(htmltools)
 library(dygraphs)
 library(xts)
+
+library(assertive, warn.conflicts = FALSE)
 
 load("msdata.RData")
 
@@ -29,7 +30,8 @@ dashboardPage(
     menuItem("Map", tabName = 'map', icon= icon("map")),
     menuItem("Graph", tabName = 'graph', icon = icon("signal")),
     menuItem("Cities", tabName = 'cities', icon = icon("city")),
-    menuItem("States", tabName = 'States', icon = icon("State"))
+    menuItem("States", tabName = 'States', icon = icon("State")),
+    menuItem("Norm.States", tabName = 'NormStates', icon = icon("State"))
     ),
   dashboardBody(
     tabItems(
@@ -51,7 +53,8 @@ dashboardPage(
         plotOutput('plot')
               ),
       tabItem(tabName = 'cities', plotOutput('cities')),
-      tabItem(tabName = 'States', plotOutput('States', height=550)
+      tabItem(tabName = 'States', plotOutput('States', height=550)),
+      tabItem(tabName = 'NormStates', plotOutput('States1', height=550) 
         
       )
   ))

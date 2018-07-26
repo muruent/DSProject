@@ -1,0 +1,12 @@
+name: gun-violence-data
+title: gun-violence-data
+username:
+account: muruent
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 387985
+bundleId: 1499972
+url: https://muruent.shinyapps.io/gun-violence-data/
+when: 1532538298.38536
+asMultiple: FALSE
+asStatic: FALSE

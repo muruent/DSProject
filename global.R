@@ -14,6 +14,11 @@ library(plotly)
 library(scales)
 library(viridis)
 library(assertive, warn.conflicts = FALSE)
+
+pop1 = read_csv("USpopedited.csv", col_names=TRUE)
+str(pop1)
+pop1 = pop1 %>% select(., States, Incidper100K) %>% arrange(Incidper100K)
+
 gv = read_csv("gvdata13to18.csv")
 #str(gv)
 # Convert the inspection.date column from character to date format.

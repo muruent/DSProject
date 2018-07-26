@@ -66,7 +66,19 @@ shinyServer(function(input, output) {
 
 
   })
-  output$map <- leaflet::renderLeaflet({
+  
+  
+  output$States1 = renderPlot({
+    
+    ggplot(data=pop1, aes(x=reorder(States,Incidper100K), y=Incidper100K, fill=Incidper100K)) +
+      geom_bar(stat = "identity") + 
+      coord_flip()  +
+      theme (legend.position = "none")+
+      ggtitle('Violent States')+
+      theme(plot.title= element_text(hjust = 0.5,size=30, face = "bold"))
+  }) 
+  
+    output$map <- leaflet::renderLeaflet({
     leaflet::leaflet(DATA$d
                      #, options = leafletOptions(minZoom=4)
     ) %>%
